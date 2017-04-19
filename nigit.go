@@ -143,6 +143,9 @@ func handleInput(w http.ResponseWriter, r *http.Request, programPath string, tim
 	// We reply with the requested content type as we do not know
 	// what the program or script will ever return while the client does
 	mediatype, _, err := mime.ParseMediaType(accept)
+
+	//Force response language to En
+	w.Header().Set("Content-Language", "en-US")
 	if err == nil && mediatype != "*/*" {
 		w.Header().Set("Content-Type", mediatype)
 		stdout.WriteTo(w)
